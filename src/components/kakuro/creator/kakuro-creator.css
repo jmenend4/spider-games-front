@@ -1,0 +1,49 @@
+.kakuro-grid {
+  display: inline-flex;
+  width: calc(14 * 4.5vh);
+  height: calc(14 * 4.5vh);
+  flex-wrap: wrap;
+}
+
+.creator-footer {
+  grid-area: panel-footer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vw;
+}
+
+.creator-header {
+  grid-area: panel-header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vw;
+}
+
+/* .creator-left-panel {
+  grid-area: left-panel;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2vw;
+} */
+
+.reference-cell-legend-container {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  height: 50%;
+  margin-right: 4vw;
+}
+
+.reference-cell-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 70%;
+  margin-right: 4vw;
+}

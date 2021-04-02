@@ -1,0 +1,41 @@
+.selector-container > .selector {
+  display: flex;
+  flex-direction: raw;
+  justify-content: left;
+  align-items: center;
+  height: 34px;
+  width: calc(var(--container-width) * 0.1px);
+  background-color: transparent;
+}
+
+.selector-container > .selector > .hifen {
+  display: inline;
+  height: 1px;
+  width: calc(var(--container-width) * 0.01px);
+  border: none;
+  margin: 5px;
+  background-color: white;
+  transition: width 0.15s;
+  transition-timing-function: linear;
+}
+
+.selector-container > .selector > .rhombus {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 15px;
+  width: 15px;
+  border: 1px solid white;
+  margin: none;
+  transform: rotate(45deg);
+  background-color: transparent;
+}
+
+.selector-container > .selector > .rhombus > .dot {
+  display: inline;
+  height: 5px;
+  width: 5px;
+  border: 1px solid white;
+  border-radius: 50%;
+  background-color: white;
+}

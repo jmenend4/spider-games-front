@@ -1,0 +1,109 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(60, 108, 119, 0.5);
+}
+
+.overlay > .menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  height: 100%;
+  width: 30%;
+  margin-left: 10%;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  background-color: rgba(65, 105, 205, 0.95);
+  transition: 0.2s;
+  transition-timing-function: ease-out;
+}
+
+.overlay > .menu > .closing-x-container {
+  padding: 10px 10px 0 0;
+  height: 8%;
+  width: 100%;
+  text-align: right;
+  vertical-align: top;
+  background-color: transparent;
+}
+
+.overlay > .menu > .closing-x-container > .closing-x {
+  display: inline-block;
+  color: white;
+  background-color: transparent;
+}
+
+.overlay > .menu > .closing-x-container > .closing-x:hover {
+  cursor: pointer;
+}
+
+/* title */
+
+.overlay > .menu > .title {
+  font-family: sans-serif;
+  font-size: 18pt;
+  color: white;
+  padding-left: 5%;
+  margin-bottom: 2%;
+  background-color: transparent;
+}
+
+.overlay > .menu > .title2 {
+  font-family: sans-serif;
+  font-size: 14pt;
+  color: white;
+  padding-left: 5%;
+  margin-top: 18%;
+  margin-bottom: 2%;
+  background-color: transparent;
+}
+
+/* left boder of the options */
+
+.overlay > .menu > .options-left-border-container {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 33%;
+  background-color: transparent;
+  vertical-align: top;
+}
+
+.overlay > .menu > .options-left-border-container > .short-border {
+  height: 5%;
+  width: calc(var(--menu-width) * 0.05px);
+  border-right: 1px solid white;
+  background-color: transparent;
+}
+
+.overlay > .menu > .options-left-border-container > .long-border {
+  height: 87%;
+  width: calc(var(--menu-width) * 0.05px);
+  border-right: 1px solid white;
+  background-color: transparent;
+}
+
+.overlay > .menu > .selector-container {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 33%;
+  width: 10%;
+  background-color: transparent;
+  vertical-align: top;
+  border-top: 1px solid white;
+}
+
+/* menu options */
+
+.overlay > .menu > .options {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 33%;
+  background-color: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}

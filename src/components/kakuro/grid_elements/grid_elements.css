@@ -1,0 +1,106 @@
+.cell {
+  height: 4.5vh;
+  width: 4.5vh;
+  vertical-align: top;
+  border: 1px solid rgb(0, 71, 77);
+}
+
+.cell-hover {
+  z-index: 10;
+  box-shadow: -3px -3px 10px rgb(60, 108, 119), 3px 3px 10px rgb(60, 108, 119);
+}
+
+.cell:hover {
+  z-index: 10;
+  box-shadow: -3px -3px 10px rgb(60, 108, 119), 3px 3px 10px rgb(60, 108, 119);
+}
+
+.white-cell {
+  color: white;
+}
+
+.reference-cell {
+  color: blue;
+  display: flex;
+  flex-direction: column;
+}
+
+.black-cell {
+  background-color: rgb(0, 71, 77);
+}
+
+.reference-container {
+  display: inline;
+  height: 4.5vh;
+  width: 4.5vh;
+  border-style: none;
+  vertical-align: top;
+}
+
+.reference-number {
+  background-color: transparent;
+  color: rgb(60, 108, 119);
+  height: 2.25vh;
+  width: 2.25vh;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1vh;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+.reference-number::-webkit-inner-spin-button,
+.reference-number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.reference-number[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.reference-number:focus {
+  outline: none;
+}
+
+.reference-number:invalid {
+  color: red;
+}
+
+.rigth-reference-number {
+  align-self: flex-end;
+}
+
+.down-reference-number {
+  align-self: flex-start;
+}
+
+.reference-division {
+  height: 1px;
+  width: calc(6.35 * 1vh);
+  border: none;
+  background-color: rgb(0, 71, 77);
+  transform: translateX(calc((4.5 - 6.35) * 1vh)) rotate(45deg);
+  transform-origin: right bottom;
+}
+
+.pullable {
+  position: absolute;
+  top: calc(var(--y) * 1px);
+  left: calc(var(--x) * 1px);
+  animation-name: pulled;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.705s;
+}
+
+@keyframes pulled {
+  100% {
+    transform: translate(
+      calc(var(--x-offset) * 1px),
+      calc(var(--y-offset) * 1px)
+    );
+  }
+}

@@ -1,0 +1,134 @@
+.expandable-selector {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+  border: calc(var(--outerBorderWidth) * 1px) solid rgb(60, 108, 119);
+  height: calc(var(--fontSize) * 1px * (5 / 2));
+  width: calc(var(--width) * 1px);
+  box-shadow: none;
+  padding: 0;
+  background-color: var(--backgroundColor);
+}
+
+.expandable-selector.selected-background {
+  background-color: var(--backgroundOnHover);
+}
+
+.expandable-selector:hover {
+  background-color: var(--backgroundOnHover);
+}
+
+/* label text */
+
+.expandable-selector > .label {
+  color: white;
+  background-color: transparent;
+  font-size: calc(var(--fontSize) * 1pt);
+  width: calc((var(--width) - 2 - (2 * (var(--fontSize) * (3 / 4)))) * 1px);
+  line-height: calc(((var(--fontSize) * 2) - 2) * 1px);
+  align-self: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+
+.expandable-selector > .lonely-label {
+  color: white;
+  background-color: transparent;
+  font-size: calc(var(--fontSize) * 1pt);
+  width: calc(var(--width) * 1px);
+  line-height: calc(((var(--fontSize) * 2) - 2) * 1px);
+  align-self: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+
+/* corners */
+
+.expandable-selector > .border-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc((var(--fontSize) * (5 / 2) + 2) * 1px);
+  width: calc(var(--fontSize) * 1px * (3 / 4));
+  background-color: transparent;
+  transform: translate(-1px, 0);
+}
+
+.expandable-selector > .border-container > .upper-left-border {
+  height: calc(var(--fontSize) * 1px * (3 / 4));
+  width: calc(var(--fontSize) * 1px * (3 / 4));
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  align-self: flex-start;
+  background-color: transparent;
+  transform: translate(-1px, 0);
+}
+
+.expandable-selector > .border-container > .upper-left-border {
+  height: calc(var(--fontSize) * 1px * (3 / 4));
+  width: calc(var(--fontSize) * 1px * (3 / 4));
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  align-self: flex-start;
+  background-color: transparent;
+  transform: translate(-1px, 0);
+}
+
+.expandable-selector > .border-container > .lower-left-border {
+  height: calc(var(--fontSize) * 1px * (3 / 4));
+  width: calc(var(--fontSize) * 1px * (3 / 4));
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  background-color: transparent;
+  transform: translate(-1px, 0);
+}
+
+.expandable-selector > .border-container > .upper-right-border {
+  height: calc(var(--fontSize) * 1px * (3 / 4));
+  width: calc(var(--fontSize) * 1px * (3 / 4));
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  background-color: transparent;
+  transform: translate(1px, 0);
+}
+
+.expandable-selector > .border-container > .lower-right-border {
+  height: calc(var(--fontSize) * 1px * (3 / 4));
+  width: calc(var(--fontSize) * 1px * (3 / 4));
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  background-color: transparent;
+  transform: translate(1px, 0);
+}
+
+/* animations */
+
+@keyframes expand-left-border {
+  100% {
+    transform: translate(calc(((var(--width) - 2) / 2) * 1px), 0);
+  }
+}
+
+@keyframes expand-right-border {
+  100% {
+    transform: translate(calc(((var(--width) - 2) / 2) * -1px), 0);
+  }
+}
+
+.expandable-selector > .border-container-left {
+  animation-name: expand-left-border;
+  animation-duration: 0.15s;
+  animation-direction: reverse;
+  animation-timing-function: linear;
+}
+
+.expandable-selector > .border-container-right {
+  animation-name: expand-right-border;
+  animation-duration: 0.15s;
+  animation-direction: reverse;
+  animation-timing-function: linear;
+}

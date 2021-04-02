@@ -1,0 +1,82 @@
+.layout-grid {
+  display: grid;
+  border: solid 6px black;
+  height: 100vh;
+  width: 100%;
+  grid: 2% 1fr 2% / 1% 1fr 1%;
+  grid-template-areas:
+    ". . ."
+    ". web ."
+    ". . .";
+}
+
+.overall-container {
+  grid-area: web;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-size: auto;
+  overflow: hidden;
+}
+
+.web-container {
+  position: absolute;
+  top: calc((var(--mouse-y-offset)) * -1px);
+  left: calc((var(--mouse-x-offset)) * -1px);
+  height: 200%;
+  width: 200%;
+  background-size: auto;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  opacity: 70%;
+}
+
+.spiders-container {
+  position: absolute;
+  top: calc((var(--mouse-y-offset)) * -1px);
+  left: calc((var(--mouse-x-offset)) * -1px);
+  height: 200%;
+  width: 200%;
+  background-size: auto;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.computer-container {
+  position: absolute;
+  height: 70%;
+  width: auto;
+  top: calc((var(--mouse-y-offset)) * 0.1px + var(--top-offset) * 1px);
+  left: calc((var(--mouse-x-offset)) * 0.1px + var(--left-offset) * 1px);
+  filter: blur(5px);
+}
+
+.inmersion {
+  animation-name: inmerse;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes inmerse {
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+.tablet-inmersion {
+  animation-name: inmerse-tablet;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes inmerse-tablet {
+  100% {
+    transform: scale(2, 2);
+    filter: blur(0);
+    opacity: 0;
+  }
+}

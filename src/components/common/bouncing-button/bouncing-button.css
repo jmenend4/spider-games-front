@@ -1,0 +1,148 @@
+.bouncing-button {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border: calc(var(--outerBorderWidth) * 1px) solid rgb(60, 108, 119);
+  height: calc(var(--sideLength) * 1px);
+  width: calc(var(--sideLength) * 1px);
+  box-shadow: none;
+  padding: 0;
+}
+
+.bouncing-button:focus {
+  outline: none;
+  align-content: space-between;
+}
+
+.bouncing-button:hover {
+  align-content: space-between;
+}
+
+.bouncing-button:hover > .border-container {
+  visibility: visible;
+}
+
+.bouncing-button:focus > .border-container {
+  visibility: visible;
+}
+
+.bouncing-button > .border-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  height: calc(var(--sideLength) * 0.25px);
+  flex: 1 1 calc(var(--sideLength) * 1px);
+  background-color: transparent;
+  /* background-color: orange; */
+  visibility: hidden;
+}
+
+.bouncing-button > .border-container > .top-left-border {
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  height: calc(var(--sideLength) * 0.25px);
+  width: calc(var(--sideLength) * 0.25px);
+  background-color: transparent;
+}
+
+.bouncing-button .border-container > .top-right-border {
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  height: calc(var(--sideLength) * 0.25px);
+  width: calc(var(--sideLength) * 0.25px);
+  background-color: transparent;
+}
+
+.bouncing-button .border-container > .bottom-left-border {
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  height: calc(var(--sideLength) * 0.25px);
+  width: calc(var(--sideLength) * 0.25px);
+  background-color: transparent;
+}
+
+.bouncing-button .border-container > .bottom-right-border {
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  height: calc(var(--sideLength) * 0.25px);
+  width: calc(var(--sideLength) * 0.25px);
+  background-color: transparent;
+}
+
+/* animation */
+
+@keyframes bounce-top-left-corner {
+  100% {
+    transform: translate(
+      calc(var(--sideLength) * var(--bouncingProportion) * 1px),
+      calc(var(--sideLength) * var(--bouncingProportion) * 1px)
+    );
+  }
+}
+
+.bouncing-button:hover > .border-container > .top-left-border,
+.bouncing-button:focus > .border-container > .top-left-border {
+  animation-name: bounce-top-left-corner;
+  animation-duration: 0.4s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes bounce-top-right-corner {
+  100% {
+    transform: translate(
+      calc(var(--sideLength) * var(--bouncingProportion) * -1px),
+      calc(var(--sideLength) * var(--bouncingProportion) * 1px)
+    );
+  }
+}
+
+.bouncing-button:hover > .border-container > .top-right-border,
+.bouncing-button:focus > .border-container > .top-right-border {
+  animation-name: bounce-top-right-corner;
+  animation-duration: 0.4s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes bounce-bottom-left-corner {
+  100% {
+    transform: translate(
+      calc(var(--sideLength) * var(--bouncingProportion) * 1px),
+      calc(var(--sideLength) * var(--bouncingProportion) * -1px)
+    );
+  }
+}
+
+.bouncing-button:hover > .border-container > .bottom-left-border,
+.bouncing-button:focus > .border-container > .bottom-left-border {
+  animation-name: bounce-bottom-left-corner;
+  animation-duration: 0.4s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes bounce-bottom-right-corner {
+  100% {
+    transform: translate(
+      calc(var(--sideLength) * var(--bouncingProportion) * -1px),
+      calc(var(--sideLength) * var(--bouncingProportion) * -1px)
+    );
+  }
+}
+
+.bouncing-button:hover > .border-container > .bottom-right-border,
+.bouncing-button:focus > .border-container > .bottom-right-border {
+  animation-name: bounce-bottom-right-corner;
+  animation-duration: 0.4s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}

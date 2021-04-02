@@ -1,0 +1,148 @@
+.kakuro-layout {
+  display: grid;
+  border: solid 6px black;
+  height: 100vh;
+  width: 100vw;
+  grid: 2% 3px 10% 3px 1fr 3px 10% 3px 2% / 1% 2px 30% 3px 0.5% 2px 1fr 3px 1%;
+  grid-template-areas:
+    ". . . . . . . . ."
+    ". left-panel-header-left-border left-panel-header-top-border left-panel-header-right-border . panel-header-left-border panel-header-top-border panel-header-right-border ."
+    ". left-panel-header-left-border left-panel-header left-panel-header-right-border . panel-header-left-border panel-header panel-header-right-border ."
+    ". left-panel-left-border left-panel-top-border left-panel-right-border . panel-left-border panel-top-border panel-right-border ."
+    ". left-panel-left-border left-panel left-panel-right-border . panel-left-border panel panel-right-border ."
+    ". left-panel-left-border left-panel left-panel-right-border . panel-left-border panel-bottom-border panel-right-border ."
+    ". left-panel-left-border left-panel left-panel-right-border . panel-footer-left-border panel-footer panel-footer-right-border ."
+    ". left-panel-left-border left-panel-bottom-border left-panel-right-border . panel-footer-left-border panel-footer-bottom-border panel-footer-right-border ."
+    ". . . . . . . . .";
+  opacity: 0;
+  animation-name: fade-in;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  overflow: hidden;
+}
+
+@keyframes fade-in {
+  100% {
+    opacity: 100%;
+  }
+}
+
+.vertical-border {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: none !important;
+  margin: none !important;
+  padding: none !important;
+}
+
+.horizontal-border {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none !important;
+  margin: none !important;
+  padding: none !important;
+}
+
+.corner-vertical-fragment {
+  height: 2.5vh;
+  width: 3px;
+  background-color: rgb(9, 255, 235);
+}
+
+.corner-horizontal-fragment {
+  height: 3px;
+  width: 2.5vh;
+  background-color: rgb(9, 255, 235);
+}
+
+.vertical-border-line {
+  width: 1px;
+  background-color: rgb(0, 71, 77);
+}
+
+.horizontal-border-line {
+  height: 1px;
+  background-color: rgb(0, 71, 77);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel-header {
+  height: 89%;
+  width: 99%;
+  background-color: rgb(9, 255, 235);
+  padding: 0;
+  margin: 0;
+  font-family: "ui-monospace", sans-serif;
+  font-weight: bold;
+  font-size: 6vh;
+  line-height: 8.9vh;
+  text-align: center;
+  user-select: none;
+}
+
+.left-panel-header {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "ui-monospace", sans-serif;
+  color: rgb(9, 255, 235);
+  font-weight: bold;
+  font-size: 4vh;
+  line-height: 10vh;
+  text-align: center;
+  user-select: none;
+}
+
+.left-panel {
+  grid-area: left-panel;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2vw;
+  flex-wrap: wrap;
+}
+
+.description {
+  padding: 0;
+  margin: 0;
+  font-family: "ui-monospace", sans-serif;
+  color: rgb(100, 255, 150);
+  font-weight: bold;
+  font-size: 2vh;
+  text-align: left;
+  user-select: none;
+  width: 100%;
+}
+
+.footer {
+  grid-area: panel-footer;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1vw;
+}
+
+.main-panel {
+  grid-area: panel;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-panel > .options {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 40%;
+}
