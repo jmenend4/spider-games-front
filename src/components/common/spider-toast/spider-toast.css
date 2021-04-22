@@ -1,0 +1,66 @@
+.toasts-container {
+  position: fixed;
+  top: calc(var(--unit) * 5px);
+  right: 0;
+  background-color: transparent;
+}
+
+.toast-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--unit) * 2.5px);
+  margin-bottom: calc(var(--unit) * 2.5px);
+  width: calc(var(--unit) * 60px);
+  background-color: rgb(9, 255, 235);
+}
+
+@keyframes open-toast {
+  100% {
+    transform: translateX(calc(var(--unit) * 60px));
+  }
+}
+
+.toast-container.open-toast {
+  animation: open-toast;
+  animation-duration: 0.25s;
+  animation-fill-mode: backwards;
+  animation-direction: reverse;
+  animation-timing-function: ease-out;
+}
+
+@keyframes close-toast {
+  100% {
+    transform: translateX(calc(var(--unit) * 60px));
+  }
+}
+
+.toast-container.close-toast {
+  animation: close-toast;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-in;
+}
+
+.toast-close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: white;
+  font-size: calc(var(--unit) * 2.5px);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.toast-message {
+  font-family: "ui-monospace", sans-serif;
+  font-size: calc(var(--unit) * 2.5px);
+  font-weight: 800;
+  color: #212529;
+  line-height: calc(var(--unit) * 3px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+  background-color: transparent;
+  cursor: pointer;
+}

@@ -60,7 +60,11 @@ const Cell = ({ cell, ...props }) => {
         ondragover={allowDrop}
         ondrop={onDrop}
         onReferenceChange={changeCellReference}
-        cell={cell}
+        cell={{
+          type: cellTypes.REFERENCE,
+          rightReference: cell.rightReference ? cell.rightReference : "",
+          downReference: cell.downReference ? cell.downReference : ""
+        }}
         onClick={handleClick}
       />
     );
@@ -82,6 +86,7 @@ const Cell = ({ cell, ...props }) => {
       ondragover={allowDrop}
       ondrop={onDrop}
       onClick={handleClick}
+      values={cell.values}
     />
   );
 };

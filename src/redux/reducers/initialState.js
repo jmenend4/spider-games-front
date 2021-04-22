@@ -1,4 +1,5 @@
 export default {
   kakuro: [],
-  spiders: []
+  spiders: [],
+  toasts: []
 };

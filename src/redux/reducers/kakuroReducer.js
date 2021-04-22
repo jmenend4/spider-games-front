@@ -5,10 +5,22 @@ import cellTypes from "../../components/kakuro/grid_elements/cellTypes";
 export default function kakuroReducer(state = initialState.kakuro, action) {
   switch (action.type) {
     case actionTypes.INITIALIZE_KAKURO: {
-      return generateNewKakuro(action.height, action.width);
+      if (action.grid === []) {
+        return generateNewKakuro(action.height, action.width);
+      }
+      return mapKakuro(action.height, action.width, action.grid, state);
     }
     case actionTypes.CHANGE_KAKURO_CELL: {
       return changeKakuroCell(state, action.row, action.column, action.cell);
+    }
+    case actionTypes.UPDATE_KAKURO_SOLUTION: {
+      // todo compareStateToSolution(state, action.solution);
+      return mapKakuro(
+        action.solutionGrid.length,
+        action.solutionGrid[0].length,
+        action.solutionGrid,
+        state
+      );
     }
     default: {
       return state;
@@ -55,3 +67,53 @@ function generateNewKakuro(height, width) {
   }
   return kakuro;
 }
+
+function mapKakuro(height, width, grid, state) {
+  try {
+    grid.forEach((row) => {
+      if (row.length !== width) {
+        throw "At least one row of the retrieved Kakuro is of different length.";
+      }
+    });
+    return grid.map(rawMapper);
+  } catch (err) {
+    console.log("The retrieved kakuro is invalid: " + err);
+    if (state === []) {
+      console.log("\n\nGenerating a new blank one.");
+      return generateNewKakuro(height, width);
+    }
+    return state;
+  }
+}
+
+const rawMapper = (raw) => {
+  return raw.map(cellMapper);
+};
+
+const cellMapper = (cell) => {
+  switch (cell.cellType) {
+    case cellTypes.BLACK: {
+      return {
+        type: cellTypes.BLACK
+      };
+    }
+    case cellTypes.REFERENCE: {
+      return {
+        type: cellTypes.REFERENCE,
+        rightReference: cell.rightReference
+          ? cell.rightReference.toString()
+          : "",
+        downReference: cell.downReference ? cell.downReference.toString() : ""
+      };
+    }
+    case cellTypes.WHITE: {
+      return {
+        type: cellTypes.WHITE,
+        values: cell.values ? cell.values : []
+      };
+    }
+    default: {
+      throw "Invalid cell type: " + cell.cellType;
+    }
+  }
+};

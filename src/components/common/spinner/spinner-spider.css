@@ -1,0 +1,223 @@
+@keyframes gradient {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.05;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.spinner-spider-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: calc(var(--size) * 1px);
+  width: calc(var(--size) * 1px);
+  background-color: transparent;
+  transform: rotate(-90deg);
+  animation-name: gradient;
+  animation-duration: 8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.spinner-spider-container.absolute-positioning {
+  position: absolute;
+  top: calc(var(--top-potition) * 1px);
+  left: calc(var(--left-position) * 1px);
+}
+
+/* head and body*/
+
+.spinner-spider-container > .head {
+  height: calc(var(--size-unit) * 10px);
+  width: calc(var(--size-unit) * 10px);
+  border: 1px solid white;
+  border-radius: 50%;
+  background-color: white;
+  flex-shrink: 0;
+  flex-grow: 0;
+  transform: translate(calc(var(--size-unit) * -22px), 0);
+}
+
+.spinner-spider-container > .body {
+  height: calc(var(--size-unit) * 15px);
+  width: calc(var(--size-unit) * 15px);
+  border: 1px solid white;
+  border-radius: 50%;
+  background-color: white;
+  /* transform: translate(-5px, 0); */
+  transform: translate(calc(var(--size-unit) * -44px), 0);
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+/* fangs */
+
+.spinner-spider-container > .fang-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(var(--size-unit) * 10px);
+  width: calc(var(--size-unit) * 4px);
+  border: none;
+  background-color: transparent;
+  /* transform: translate(3px, 0); */
+  transform: translate(calc(var(--size-unit) * -7px), 0);
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.spinner-spider-container > .fang-container > .right-fang {
+  height: calc(var(--size-unit) * 4px);
+  width: calc(var(--size-unit) * 4px);
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  transform: rotate(45deg) translate(0, calc(var(--size-unit) * 2px));
+  background-color: transparent;
+}
+
+.spinner-spider-container > .fang-container > .left-fang {
+  height: calc(var(--size-unit) * 4px);
+  width: calc(var(--size-unit) * 4px);
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  transform: rotate(-45deg) translate(0, calc(var(--size-unit) * -2px));
+  background-color: transparent;
+}
+
+/* first set of legs */
+
+.spinner-spider-container > .first-legs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(var(--size-unit) * 20px);
+  width: calc(var(--size-unit) * 15px);
+  border: none;
+  background-color: transparent;
+  transform: translate(calc(var(--size-unit) * -19px), 0);
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.spinner-spider-container > .first-legs-container > .first-right-leg {
+  height: calc(var(--size-unit) * 5px);
+  width: calc(var(--size-unit) * 15px);
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  transform: skewX(45deg);
+  background-color: transparent;
+}
+
+.spinner-spider-container > .first-legs-container > .first-left-leg {
+  height: calc(var(--size-unit) * 5px);
+  width: calc(var(--size-unit) * 15px);
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  transform: skewX(-45deg);
+  background-color: transparent;
+}
+
+/* fourth pair of legs */
+
+.spinner-spider-container > .fourth-legs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(var(--size-unit) * 20px);
+  width: calc(var(--size-unit) * 15px);
+  border: none;
+  background-color: transparent;
+  transform: translate(calc(var(--size-unit) * 31px), 0);
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.spinner-spider-container > .fourth-legs-container > .fourth-right-leg {
+  height: calc(var(--size-unit) * 5px);
+  width: calc(var(--size-unit) * 15px);
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  transform: skewX(-45deg);
+  background-color: transparent;
+}
+
+.spinner-spider-container > .fourth-legs-container > .fourth-left-leg {
+  height: calc(var(--size-unit) * 5px);
+  width: calc(var(--size-unit) * 15px);
+  border-left: 1px solid white;
+  border-bottom: 1px solid white;
+  transform: skewX(45deg);
+  background-color: transparent;
+}
+
+/* second pair of legs */
+
+.spinner-spider-container > .second-legs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(var(--size-unit) * 28px);
+  width: calc(var(--size-unit) * 15px);
+  border: none;
+  background-color: transparent;
+  transform: translate(calc(var(--size-unit) * 2px), 0);
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.spinner-spider-container > .second-legs-container > .second-right-leg {
+  height: calc(var(--size-unit) * 10px);
+  width: calc(var(--size-unit) * 10px);
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  transform: skewX(20deg) skewY(20deg);
+  background-color: transparent;
+}
+
+.spinner-spider-container > .second-legs-container > .second-left-leg {
+  height: calc(var(--size-unit) * 10px);
+  width: calc(var(--size-unit) * 10px);
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  transform: skewX(-20deg) skewY(-20deg);
+  background-color: transparent;
+}
+
+/* third pair of legs */
+
+.spinner-spider-container > .third-legs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(var(--size-unit) * 28px);
+  width: calc(var(--size-unit) * 15px);
+  border: none;
+  background-color: transparent;
+  transform: translate(calc(var(--size-unit) * 44px), 0);
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.spinner-spider-container > .third-legs-container > .third-right-leg {
+  height: calc(var(--size-unit) * 10px);
+  width: calc(var(--size-unit) * 10px);
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  transform: skewX(-20deg) skewY(-20deg);
+  background-color: transparent;
+}
+
+.spinner-spider-container > .third-legs-container > .third-left-leg {
+  height: calc(var(--size-unit) * 10px);
+  width: calc(var(--size-unit) * 10px);
+  border-left: 1px solid white;
+  border-bottom: 1px solid white;
+  transform: skewX(20deg) skewY(20deg);
+  background-color: transparent;
+}

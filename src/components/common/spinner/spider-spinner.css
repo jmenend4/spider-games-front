@@ -1,0 +1,49 @@
+.background {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 71, 77, 0.8);
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+@keyframes circle-animation {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#outter-circle {
+  animation-name: circle-animation;
+  animation-timing-function: linear;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+#inner-circle {
+  animation-name: circle-animation;
+  animation-timing-function: linear;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-direction: reverse;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: inner-gradient 6s ease 0 infinite alternate;
+}
+
+#inner-inner-circle {
+  animation-name: circle-animation;
+  animation-timing-function: linear;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  transform-origin: center;
+  transform-box: fill-box;
+}

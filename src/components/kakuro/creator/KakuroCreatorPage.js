@@ -10,30 +10,58 @@ import "./kakuro-creator.css";
 import HandySpider from "../../common/spiders/HandySpider";
 import difficulties from "../../../utils/difficulty";
 import ExpandableSelector from "../../common/expandable-selector/ExpandableSelector";
+import SpiderSpinner from "../../common/spinner/SpiderSpinner";
+import * as toastActions from "../../../redux/actions/toastActions";
+import toastTypes from "../../common/spider-toast/toastTypes";
 
 const KakuroCreatorPage = ({
   kakuro,
   initializeKakuro,
   changeKakuroCell,
+  updateKakuroSolution,
+  addToast,
   onBack,
   refocus
 }) => {
   const options = {
-    WHITE: cellTypes.WHITE,
-    REFERENCE: cellTypes.REFERENCE,
-    BLACK: cellTypes.BLACK,
     BACK: "back",
-    SAVE: "save"
+    SAVE: "save",
+    SOLVE: "solve"
   };
-  const [selectedOption, setSelectedOption] = useState(options.BLACK);
+  const [selectedOption, setSelectedOption] = useState(options.SAVE);
+  const [selectedReferenceCell, setSelectedReferenceCell] = useState(
+    cellTypes.BLACK
+  );
   const [selectedDifficulty, setSelectedDifficulty] = useState(
     difficulties.HARD
   );
+  const [spinnerOn, setSpinnerOn] = useState(false);
   const handySpiders = useRef([]);
   const handySpidersCounter = useRef(0);
+
   useEffect(() => {
     if (kakuro.length === 0) {
-      initializeKakuro(14, 14);
+      setSpinnerOn(true);
+      kakuroActions
+        .retrieveDraftKakuro()
+        .then((response) => {
+          initializeKakuro(response.height, response.width, response.grid);
+          setSpinnerOn(false);
+          addToast(
+            20000,
+            toastTypes.RED,
+            "mensaje de prueba prueba prueba prueba prueba prueba prueba prueba prueba nnnnnnnnnn nnnnnnnnn nnnn nn "
+          );
+          addToast(
+            15000,
+            toastTypes.YELLOW,
+            "Mensaje muy pero muy largo para probar si creamos un toast después de otro"
+          );
+          addToast(10000, toastTypes.GREEN, "mensaje común");
+        })
+        .catch((err) => {
+          setSpinnerOn(false);
+        });
     }
   }, [kakuro.length]);
 
@@ -68,11 +96,16 @@ const KakuroCreatorPage = ({
     setSelectedDifficulty(id);
   };
 
+  const handleReferenceCellChange = ({ currentTarget }) => {
+    const { id } = currentTarget;
+    setSelectedReferenceCell(id);
+  };
+
   const getSpiderHelp = (cellId, row, column, cell) => {
     if (
-      selectedOption !== options.WHITE &&
-      selectedOption !== options.REFERENCE &&
-      selectedOption !== options.BLACK
+      selectedReferenceCell !== cellTypes.WHITE &&
+      selectedReferenceCell !== cellTypes.REFERENCE &&
+      selectedReferenceCell !== cellTypes.BLACK
     ) {
       return;
     }
@@ -80,9 +113,9 @@ const KakuroCreatorPage = ({
       .getElementById("actualcell" + cellId)
       .getBoundingClientRect();
     const targetRect = document
-      .getElementById("actualcell" + selectedOption + "Ref")
+      .getElementById("actualcell" + selectedReferenceCell + "Ref")
       .getBoundingClientRect();
-    const _selectedOption = selectedOption;
+    const _selectedOption = selectedReferenceCell;
     handySpiders.current.push({
       id: handySpidersCounter.current,
       row,
@@ -98,7 +131,7 @@ const KakuroCreatorPage = ({
           targetX={targetRect.x}
           targetY={targetRect.y}
           onDone={onHelpIsDone}
-          cellType={selectedOption}
+          cellType={selectedReferenceCell}
         />
       )
     });
@@ -115,6 +148,20 @@ const KakuroCreatorPage = ({
       (spider) => spider.id !== id
     );
     // no need to re render as the spiders are so handy that they remove themselves from the DOM :)
+  };
+
+  const solve = () => {
+    setSpinnerOn(true);
+    kakuroActions
+      .solveKakuro(kakuro)
+      .then((response) => {
+        console.log(response);
+        updateKakuroSolution(response.result.kakuro);
+        setSpinnerOn(false);
+      })
+      .catch((err) => {
+        setSpinnerOn(false);
+      });
   };
 
   return (
@@ -190,16 +237,15 @@ const KakuroCreatorPage = ({
                 irreplaceable={true}
                 onCellChange={changeKakuroCell}
                 key={10001}
-                id={options.BLACK + "Ref"}
+                id={cellTypes.BLACK + "Ref"}
                 onClick={() => {}}
               />
             }
             sideLengthPx={100}
             bouncingProportion={0.03}
-            refocus={refocus}
-            name={options.BLACK}
-            selectedId={selectedOption}
-            onFocus={handleOptionFocus}
+            id={cellTypes.BLACK}
+            selectedId={selectedReferenceCell}
+            onSelect={handleReferenceCellChange}
           />
           <BouncingButton
             containedComponent={
@@ -213,16 +259,15 @@ const KakuroCreatorPage = ({
                 irreplaceable={true}
                 onCellChange={changeKakuroCell}
                 key={10002}
-                id={options.REFERENCE + "Ref"}
+                id={cellTypes.REFERENCE + "Ref"}
                 onClick={() => {}}
               />
             }
             sideLengthPx={100}
             bouncingProportion={0.03}
-            name={options.REFERENCE}
-            selectedId={selectedOption}
-            onFocus={handleOptionFocus}
-            refocus={refocus}
+            id={cellTypes.REFERENCE}
+            selectedId={selectedReferenceCell}
+            onSelect={handleReferenceCellChange}
           />
           <BouncingButton
             containedComponent={
@@ -236,16 +281,15 @@ const KakuroCreatorPage = ({
                 irreplaceable={true}
                 onCellChange={changeKakuroCell}
                 key={10003}
-                id={options.WHITE + "Ref"}
+                id={cellTypes.WHITE + "Ref"}
                 onClick={() => {}}
               />
             }
             sideLengthPx={100}
             bouncingProportion={0.03}
-            name={options.WHITE}
-            selectedId={selectedOption}
-            onFocus={handleOptionFocus}
-            refocus={refocus}
+            id={cellTypes.WHITE}
+            selectedId={selectedReferenceCell}
+            onSelect={handleReferenceCellChange}
           />
         </div>
         <div className="kakuro-grid">{generateKakuroGrid()}</div>
@@ -258,6 +302,19 @@ const KakuroCreatorPage = ({
           onClick={onBack}
           label="BACK"
           name={options.BACK}
+          selectedId={selectedOption}
+          onFocus={handleOptionFocus}
+          refocus={refocus}
+          backgroundColor={"rgba(0, 71, 77, 0.3)"}
+          backgroundOnHover={"rgb(0, 71, 77)"}
+          textAlignment="center"
+        />
+        <ExpandableButton
+          fontSizePt={18}
+          widthPx={window.innerWidth * 0.15}
+          onClick={solve}
+          label="SOLVE"
+          name={options.SOLVE}
           selectedId={selectedOption}
           onFocus={handleOptionFocus}
           refocus={refocus}
@@ -314,6 +371,7 @@ const KakuroCreatorPage = ({
           onSelect={handleDifficultyChange}
         />
       </div>
+      {spinnerOn && <SpiderSpinner />}
     </>
   );
 };
@@ -322,6 +380,8 @@ KakuroCreatorPage.propTypes = {
   kakuro: PropTypes.array.isRequired,
   initializeKakuro: PropTypes.func.isRequired,
   changeKakuroCell: PropTypes.func.isRequired,
+  updateKakuroSolution: PropTypes.func.isRequired,
+  addToast: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
   refocus: PropTypes.number.isRequired
 };
@@ -334,7 +394,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   initializeKakuro: kakuroActions.initialize,
-  changeKakuroCell: kakuroActions.changeKakuroCell
+  changeKakuroCell: kakuroActions.changeKakuroCell,
+  updateKakuroSolution: kakuroActions.updateKakuroSolution,
+  addToast: toastActions.addToast
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(KakuroCreatorPage);

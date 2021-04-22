@@ -5,8 +5,8 @@ import "./grid_elements.css";
 const ReferenceCell = (props) => {
   const [isMouseHovering, setIsMouseHovering] = useState(false);
   const [references, setReferences] = useState({
-    rightReference: "",
-    downReference: ""
+    rightReference: props.cell.rightReference,
+    downReference: props.cell.downReference
   });
 
   function handleReferenceChange({ target }) {
@@ -17,7 +17,7 @@ const ReferenceCell = (props) => {
       setReferences(_references);
     }
     const n = parseInt(value, 10);
-    if (n > 2 && n < 46) {
+    if ((n > 2 && n < 46) || value === "") {
       props.onReferenceChange(_references);
     }
   }
@@ -51,6 +51,7 @@ const ReferenceCell = (props) => {
           type="number"
           name="rightReference"
           value={references.rightReference}
+          minLength={0}
           maxLength={2}
           min={3}
           max={45}

@@ -24,7 +24,10 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.API_URL": JSON.stringify("http://localhost:8080/api/v1")
+      "process.env.API_URL": JSON.stringify("http://localhost:8080/api/v1"),
+      "process.env.PYTHON_API_URL": JSON.stringify(
+        "http://localhost:5000/api/v1"
+      )
     }),
     new HtmlWebpackPlugin({
       template: "src/index.html",

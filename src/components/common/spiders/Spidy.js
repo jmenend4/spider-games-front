@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 import spiderStatus from "./spiderStatus";
 
 const Spidy = ({ maxX, maxY, spiderState, toCrash, updateSpiderState }) => {
-  //   useEffect(() => {}, [overlappedSide]);
-
   const offsetExceedsBoundries = (xOffset, yOffset) => {
     return (
       spiderState.x + spiderState.currentXOffset + xOffset >= maxX - 40 ||

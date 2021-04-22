@@ -12,22 +12,22 @@
   padding: 0;
 }
 
-.bouncing-button:focus {
+/* .bouncing-button:focus {
   outline: none;
   align-content: space-between;
 }
 
 .bouncing-button:hover {
   align-content: space-between;
-}
+} */
 
-.bouncing-button:hover > .border-container {
+/* .bouncing-button:hover > .border-container {
   visibility: visible;
 }
 
 .bouncing-button:focus > .border-container {
   visibility: visible;
-}
+} */
 
 .bouncing-button > .border-container {
   display: flex;
@@ -37,8 +37,6 @@
   height: calc(var(--sideLength) * 0.25px);
   flex: 1 1 calc(var(--sideLength) * 1px);
   background-color: transparent;
-  /* background-color: orange; */
-  visibility: hidden;
 }
 
 .bouncing-button > .border-container > .top-left-border {
@@ -84,8 +82,8 @@
   }
 }
 
-.bouncing-button:hover > .border-container > .top-left-border,
-.bouncing-button:focus > .border-container > .top-left-border {
+.bouncing-button > .border-container > .top-left-border,
+.bouncing-button > .border-container > .top-left-border {
   animation-name: bounce-top-left-corner;
   animation-duration: 0.4s;
   animation-direction: alternate;
@@ -102,8 +100,8 @@
   }
 }
 
-.bouncing-button:hover > .border-container > .top-right-border,
-.bouncing-button:focus > .border-container > .top-right-border {
+.bouncing-button > .border-container > .top-right-border,
+.bouncing-button > .border-container > .top-right-border {
   animation-name: bounce-top-right-corner;
   animation-duration: 0.4s;
   animation-direction: alternate;
@@ -120,8 +118,8 @@
   }
 }
 
-.bouncing-button:hover > .border-container > .bottom-left-border,
-.bouncing-button:focus > .border-container > .bottom-left-border {
+.bouncing-button > .border-container > .bottom-left-border,
+.bouncing-button > .border-container > .bottom-left-border {
   animation-name: bounce-bottom-left-corner;
   animation-duration: 0.4s;
   animation-direction: alternate;
@@ -138,8 +136,8 @@
   }
 }
 
-.bouncing-button:hover > .border-container > .bottom-right-border,
-.bouncing-button:focus > .border-container > .bottom-right-border {
+.bouncing-button > .border-container > .bottom-right-border,
+.bouncing-button > .border-container > .bottom-right-border {
   animation-name: bounce-bottom-right-corner;
   animation-duration: 0.4s;
   animation-direction: alternate;

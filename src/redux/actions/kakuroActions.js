@@ -2,8 +2,8 @@ import actionsTypes from "./actionTypes";
 import * as api from "../../api/kakurosApi";
 import cellTypes from "../../components/kakuro/grid_elements/cellTypes";
 
-export function initializeSuccess(height, width) {
-  return { type: actionsTypes.INITIALIZE_KAKURO, height, width };
+export function initializeSuccess(height, width, grid) {
+  return { type: actionsTypes.INITIALIZE_KAKURO, height, width, grid };
 }
 
 export function changeKakuroCellSuccess(row, column, cell) {
@@ -15,9 +15,13 @@ export function changeKakuroCellSuccess(row, column, cell) {
   };
 }
 
-export function initialize(height, width) {
+export function updateKakuroSolutionSuccess(solutionGrid) {
+  return { type: actionsTypes.UPDATE_KAKURO_SOLUTION, solutionGrid };
+}
+
+export function initialize(height, width, grid) {
   return function (dispatch) {
-    dispatch(initializeSuccess(height, width));
+    dispatch(initializeSuccess(height, width, grid));
   };
 }
 
@@ -27,35 +31,55 @@ export function changeKakuroCell(row, column, cell) {
   };
 }
 
+export function updateKakuroSolution(solutionGrid) {
+  return function (dispath) {
+    dispath(updateKakuroSolutionSuccess(solutionGrid));
+  };
+}
+
+export function solveKakuro(kakuroGrid) {
+  return api.solve(kakuroGrid);
+}
+
+export async function retrieveDraftKakuro() {
+  return api.retrieveDraftKakuro();
+}
+
 export function saveKakuro(kakuroGrid, difficulty) {
   const kakuro = {
     difficulty,
     height: kakuroGrid.length,
     width: kakuroGrid[0].length,
     status: "DRAFT",
-    grid: []
+    grid: mapGridToApi(kakuroGrid)
   };
-  kakuroGrid.forEach((row) => {
-    kakuro.grid.push(row.map(cellMapper));
-  });
   return api.save(kakuro);
 }
 
-const cellMapper = (cell) => {
+const mapGridToApi = (grid) => {
+  return grid.map(mapRowToApi);
+};
+
+const mapRowToApi = (row) => {
+  return row.map(mapCellToApi);
+};
+
+const mapCellToApi = (cell) => {
   switch (cell.type) {
     case cellTypes.BLACK: {
       return {
-        celltype: cellTypes.BLACK
+        cellType: cellTypes.BLACK
       };
     }
     case cellTypes.WHITE: {
       return {
-        cellType: cellTypes.WHITE
+        cellType: cellTypes.WHITE,
+        values: cell.values
       };
     }
     case cellTypes.REFERENCE: {
       return {
-        celltype: cellTypes.REFERENCE,
+        cellType: cellTypes.REFERENCE,
         rightReference: cell.rightReference,
         downReference: cell.downReference
       };
