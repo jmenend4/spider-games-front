@@ -16,3 +16,9 @@ export function handleError(error) {
   console.log(error);
   throw error;
 }
+
+export const formatFileTransfer = (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  return formData;
+};

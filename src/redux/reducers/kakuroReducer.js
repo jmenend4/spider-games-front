@@ -5,7 +5,7 @@ import cellTypes from "../../components/kakuro/grid_elements/cellTypes";
 export default function kakuroReducer(state = initialState.kakuro, action) {
   switch (action.type) {
     case actionTypes.INITIALIZE_KAKURO: {
-      if (action.grid === []) {
+      if (action.grid.length === 0) {
         return generateNewKakuro(action.height, action.width);
       }
       return mapKakuro(action.height, action.width, action.grid, state);
@@ -21,6 +21,9 @@ export default function kakuroReducer(state = initialState.kakuro, action) {
         action.solutionGrid,
         state
       );
+    }
+    case actionTypes.RESET_KAKURO: {
+      return [];
     }
     default: {
       return state;

@@ -1,4 +1,4 @@
-import { handleResponse, handleError } from "./apiUtils";
+import { handleResponse, handleError, formatFileTransfer } from "./apiUtils";
 const javaApiBaseUrl = process.env.API_URL + "/kakuros";
 const pythonApiBaseUrl = process.env.PYTHON_API_URL + "/kakuros";
 
@@ -17,6 +17,20 @@ export function save(kakuro) {
     .catch(handleError);
 }
 
+export const retrieveDraftKakuro = async () => {
+  const uri = javaApiBaseUrl + "/drafts";
+  return fetch(uri)
+    .then(async (response) => {
+      let kakuro = { height: 14, width: 14, grid: [] };
+      if (response.status === 200) {
+        const body = await response.json();
+        kakuro = body.result.kakuro;
+      }
+      return kakuro;
+    })
+    .catch(handleError);
+};
+
 export const solve = (kakuroGrid) => {
   return fetch(pythonApiBaseUrl, {
     method: "POST",
@@ -29,16 +43,18 @@ export const solve = (kakuroGrid) => {
     .catch(handleError);
 };
 
-export const retrieveDraftKakuro = async () => {
-  const uri = javaApiBaseUrl + "/drafts";
-  return fetch(uri)
-    .then(async (response) => {
-      let kakuro = { height: 14, width: 14, grid: [] };
-      if (response.status === 200) {
-        const body = await response.json();
-        kakuro = body.result.kakuro;
-      }
-      return kakuro;
-    })
+export const detect = (kakuroImageFile) => {
+  // const formData = formatFileTransfer(kakuroImageFile);
+  return fetch(pythonApiBaseUrl + "/detections", {
+    method: "POST",
+    // headers: { "content-type": "multipart/form-data" },
+    // headers: {
+    //   "Content-type": "application/json"
+    // },
+    // body: JSON.stringify({ hola: "holahola" })
+    // body: formData
+    body: kakuroImageFile
+  })
+    .then(handleResponse)
     .catch(handleError);
 };

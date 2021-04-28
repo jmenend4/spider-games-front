@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import ExpandableButton from "../common/expandable-button/ExpandableButton";
 import "./kakuro-main.css";
 import { useHistory } from "react-router-dom";
 import KakuroCreatorPage from "./creator/KakuroCreatorPage";
+import CreateFromImage from "./creator/CreateFromImage";
+import * as kakuroActions from "../../redux/actions/kakuroActions";
 
-const KakuroMainPage = () => {
+const KakuroMainPage = ({ resetKakuro }) => {
   const options = {
     PLAY: "play",
     CREATE: "create",
@@ -65,6 +68,7 @@ const KakuroMainPage = () => {
   };
 
   const onBackToKakuroMainPage = () => {
+    resetKakuro();
     setClickedOption(false);
   };
 
@@ -80,6 +84,9 @@ const KakuroMainPage = () => {
             onBack={onBackToKakuroMainPage}
             refocus={refocus}
           />
+        )}
+        {clickedOption && selectedOption === options.CAPTURE && (
+          <CreateFromImage onBack={onBackToKakuroMainPage} refocus={refocus} />
         )}
 
         {
@@ -127,9 +134,7 @@ const KakuroMainPage = () => {
                   <ExpandableButton
                     fontSizePt={window.innerHeight * 0.025}
                     widthPx={window.innerWidth * 0.3}
-                    onClick={() => {
-                      history.push("/");
-                    }}
+                    onClick={onOptionClick}
                     label="CREATE FROM IMAGE CAPTURE"
                     name={options.CAPTURE}
                     selectedId={selectedOption}
@@ -392,4 +397,8 @@ const KakuroMainPage = () => {
   );
 };
 
-export default KakuroMainPage;
+const mapDispatchToProps = {
+  resetKakuro: kakuroActions.resetKakuro
+};
+
+export default connect(null, mapDispatchToProps)(KakuroMainPage);

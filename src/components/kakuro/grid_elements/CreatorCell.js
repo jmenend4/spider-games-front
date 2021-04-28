@@ -98,7 +98,7 @@ Cell.propTypes = {
   column: PropTypes.number,
   irreplaceable: PropTypes.bool,
   onCellChange: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func
 };
 
 export default Cell;

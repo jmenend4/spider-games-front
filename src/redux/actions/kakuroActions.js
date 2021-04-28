@@ -1,6 +1,8 @@
 import actionsTypes from "./actionTypes";
 import * as api from "../../api/kakurosApi";
 import cellTypes from "../../components/kakuro/grid_elements/cellTypes";
+import toastTypes from "../../components/common/spider-toast/toastTypes";
+import { addToastSuccess } from "./toastActions";
 
 export function initializeSuccess(height, width, grid) {
   return { type: actionsTypes.INITIALIZE_KAKURO, height, width, grid };
@@ -17,6 +19,10 @@ export function changeKakuroCellSuccess(row, column, cell) {
 
 export function updateKakuroSolutionSuccess(solutionGrid) {
   return { type: actionsTypes.UPDATE_KAKURO_SOLUTION, solutionGrid };
+}
+
+export function resetKakuroSuccess() {
+  return { type: actionsTypes.RESET_KAKURO };
 }
 
 export function initialize(height, width, grid) {
@@ -36,6 +42,33 @@ export function updateKakuroSolution(solutionGrid) {
     dispath(updateKakuroSolutionSuccess(solutionGrid));
   };
 }
+
+export function resetKakuro() {
+  return function (dispatch) {
+    dispatch(resetKakuroSuccess());
+  };
+}
+
+export const detectKakuro = (kakuroImageFile) => {
+  return function (dispatch) {
+    api
+      .detect(kakuroImageFile)
+      .then((response) => {
+        dispatch(
+          addToastSuccess(toastTypes.GREEN, "Kakuro detectado exitosamente")
+        );
+        console.log(response);
+      })
+      .catch((err) => {
+        dispatch(
+          addToastSuccess(
+            toastTypes.RED,
+            "Ocurrió un error al detectar el kakuro: " + err
+          )
+        );
+      });
+  };
+};
 
 export function solveKakuro(kakuroGrid) {
   return api.solve(kakuroGrid);

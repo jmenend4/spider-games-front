@@ -13,6 +13,7 @@ import ExpandableSelector from "../../common/expandable-selector/ExpandableSelec
 import SpiderSpinner from "../../common/spinner/SpiderSpinner";
 import * as toastActions from "../../../redux/actions/toastActions";
 import toastTypes from "../../common/spider-toast/toastTypes";
+import options from "./creatorOptions";
 
 const KakuroCreatorPage = ({
   kakuro,
@@ -23,11 +24,6 @@ const KakuroCreatorPage = ({
   onBack,
   refocus
 }) => {
-  const options = {
-    BACK: "back",
-    SAVE: "save",
-    SOLVE: "solve"
-  };
   const [selectedOption, setSelectedOption] = useState(options.SAVE);
   const [selectedReferenceCell, setSelectedReferenceCell] = useState(
     cellTypes.BLACK
@@ -47,20 +43,14 @@ const KakuroCreatorPage = ({
         .then((response) => {
           initializeKakuro(response.height, response.width, response.grid);
           setSpinnerOn(false);
-          addToast(
-            20000,
-            toastTypes.RED,
-            "mensaje de prueba prueba prueba prueba prueba prueba prueba prueba prueba nnnnnnnnnn nnnnnnnnn nnnn nn "
-          );
-          addToast(
-            15000,
-            toastTypes.YELLOW,
-            "Mensaje muy pero muy largo para probar si creamos un toast después de otro"
-          );
-          addToast(10000, toastTypes.GREEN, "mensaje común");
         })
-        .catch((err) => {
+        .catch(() => {
           setSpinnerOn(false);
+          addToast(
+            3000,
+            toastTypes.RED,
+            "Failed to retrieve draft kakuro. Generating empty one."
+          );
         });
     }
   }, [kakuro.length]);
